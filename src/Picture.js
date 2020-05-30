@@ -27,51 +27,46 @@ class GetPictures extends React.Component {
     this.setState({searchKey: event.target.value})
   }
 
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      this.initData()
+    }
+  }
+
   render() {
     return (
       <div id="container">
-        <div className="photoprops">
-          <div className="form-group">
-            <label>Search tag here :</label>
-            <input type="text" className="form-control" id="inputTag"  placeholder="Search tag here" 
-              value={this.state.searchKey} 
-              onChange={this.handleChange.bind(this)}
-            />
+        <div className="searchbar">
+          <div className="form-row">
+            <div className="col-md-6 mb-3">
+              {/* <label>Search tag here </label> */}
+              <input type="text" className="form-control" id="inputTag"  placeholder="Search tag here" 
+                value={this.state.searchKey} 
+                onChange={this.handleChange.bind(this)}
+                onKeyPress={this.handleKeyPress}
+              />
+            </div>
+            <div className="col-md-3 mb-3">
+              <button type="submit" className="btn btn-primary" onClick={this.initData}>Search</button>
+            </div>
           </div>
-          <button type="submit" className="btn btn-primary" onClick={this.initData}>Search</button>
         </div>
-        
 
         {this.state.data.map(x => 
-          <div>{x.title}
-            <img src={x.link} key={x.title} alt="test"></img>
+          <div className="photocard">
+            <div className="border border-primary">
+              <img className="photoprops" src={x.link} key={x.title} alt="test"/>
+              <div className="card-body">
+              <h5 className="card-title">Title : {x.title}</h5>
+              <p className="card-text">Date Published : {x.datePublished}</p>
+              <br/>
+              <p className="card-text">Tags : {x.tags}</p>
+              </div>
+            </div>
           </div>
         )}
       </div>
     )
   }
 }
-
-// function GetPicture() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/Picture.js</code> and save to reload.
-//           Test
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
 export default GetPictures;
