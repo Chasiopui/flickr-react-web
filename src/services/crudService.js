@@ -1,6 +1,5 @@
 import { apiUrl } from '../config';
 import axios from 'axios';
-// import toastService from './toastService'
 
 function crudService (baseUrl) {
   const url = apiUrl + baseUrl;
@@ -11,7 +10,7 @@ function crudService (baseUrl) {
     },
 
     getFiltered: function (params) {
-      return axios.post(`${url}/filter`, params)
+      return axios.get(`${url}`, params)
     }
   }
 }
